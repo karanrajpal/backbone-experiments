@@ -51,61 +51,6 @@
 		}
 	});
 
-
-	function evaluate(expr){
-		var chars = expr.split(" ");
-		console.log(chars);
-		for(var i=0;i<chars.length;i++){
-			if(!(parseInt(chars[i])) && (chars[i]=='*') || (chars[i]=='/')){
-				console.log('evaluating the mult and div');
-			}
-		}
-	}
-
-	function expr (expr) {
-
-    var chars = expr.split("");
-    var n = [], op = [], index = 0, oplast = true;
-
-    n[index] = "";
-
-    // Parse the expression
-    for (var c = 0; c < chars.length; c++) {
-
-        if (isNaN(parseInt(chars[c])) && chars[c] !== "." && !oplast) {
-            op[index] = chars[c];
-            index++;
-            n[index] = "";
-            oplast = true;
-        } else {
-            n[index] += chars[c];
-            oplast = false;
-        }
-    }
-
-    // Calculate the expression
-    expr = parseFloat(n[0]);
-    for (var o = 0; o < op.length; o++) {
-        var num = parseFloat(n[o + 1]);
-        switch (op[o]) {
-            case "+":
-                expr = expr + num;
-                break;
-            case "-":
-                expr = expr - num;
-                break;
-            case "*":
-                expr = expr * num;
-                break;
-            case "/":
-                expr = expr / num;
-                break;
-        }
-    }
-
-    return expr;
-	}
-
 	App.Models.Button = Backbone.Model.extend({
 
 	});
@@ -124,7 +69,7 @@
 		append: function() {
 			var clicked = this.model.get('value');
 			if(clicked==' = '){
-				var finalResult = evaluate(expression);
+				var finalResult = eval(expression);
 				console.log("result is : "+ finalResult);
 				expression='0';
 				result.set('exp',finalResult);
